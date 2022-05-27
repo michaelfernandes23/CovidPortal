@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidPortal.API", "CovidPortal\CovidPortal.API.csproj", "{4C82BD30-28D7-4DF9-A9DC-5E7A6C939BCC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BF2F480A-8445-4D89-9C16-ECC21C8B094A} = {BF2F480A-8445-4D89-9C16-ECC21C8B094A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidPortal.Services", "CovidPortal.Services\CovidPortal.Services.csproj", "{BF2F480A-8445-4D89-9C16-ECC21C8B094A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36842043-F8B6-439C-A3DE-FD3807C79F02} = {36842043-F8B6-439C-A3DE-FD3807C79F02}
+		{3312D0A1-4948-4392-AA2A-139F8E99F209} = {3312D0A1-4948-4392-AA2A-139F8E99F209}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidPortal.Domain", "CovidPortal.Domain\CovidPortal.Domain.csproj", "{36842043-F8B6-439C-A3DE-FD3807C79F02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidPortal.UnitTests", "CovidPortal.UnitTesting\CovidPortal.UnitTests.csproj", "{AC766DC4-46AA-4C99-828D-F656ED1828DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidPortal.SQL.Infrastructure", "CovidPortal.SQL.Infrastructure\CovidPortal.SQL.Infrastructure.csproj", "{3312D0A1-4948-4392-AA2A-139F8E99F209}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C82BD30-28D7-4DF9-A9DC-5E7A6C939BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C82BD30-28D7-4DF9-A9DC-5E7A6C939BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C82BD30-28D7-4DF9-A9DC-5E7A6C939BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C82BD30-28D7-4DF9-A9DC-5E7A6C939BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF2F480A-8445-4D89-9C16-ECC21C8B094A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF2F480A-8445-4D89-9C16-ECC21C8B094A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF2F480A-8445-4D89-9C16-ECC21C8B094A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF2F480A-8445-4D89-9C16-ECC21C8B094A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36842043-F8B6-439C-A3DE-FD3807C79F02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36842043-F8B6-439C-A3DE-FD3807C79F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36842043-F8B6-439C-A3DE-FD3807C79F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36842043-F8B6-439C-A3DE-FD3807C79F02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC766DC4-46AA-4C99-828D-F656ED1828DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC766DC4-46AA-4C99-828D-F656ED1828DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC766DC4-46AA-4C99-828D-F656ED1828DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC766DC4-46AA-4C99-828D-F656ED1828DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3312D0A1-4948-4392-AA2A-139F8E99F209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3312D0A1-4948-4392-AA2A-139F8E99F209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3312D0A1-4948-4392-AA2A-139F8E99F209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3312D0A1-4948-4392-AA2A-139F8E99F209}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75DE4F7F-4B6E-446F-B0DD-FE0AA449E843}
+	EndGlobalSection
+EndGlobal
