@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CovidPortal.Domain.DTO
 {
-    public class CovidDataResponse
+    public class CovidData
     {
         public string Id { get; set; }
         public string Name { get; set; }

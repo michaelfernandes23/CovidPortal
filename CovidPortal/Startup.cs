@@ -11,12 +11,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CovidPortal
+namespace CovidPortal.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IHostEnvironment _hostEnvironment;
+
+        public Startup(IConfiguration configuration, IHostEnvironment hostEnvironment)
         {
+            _hostEnvironment = hostEnvironment;
             Configuration = configuration;
         }
 
@@ -26,6 +29,14 @@ namespace CovidPortal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddHealthChecks();
+            services.AddLogs(Configuration);
+            services.AddDbContext(Configuration, _hostEnvironment);
+            services.AddCoresAllowAll();
+            services.AddSwagger();
+            services.AddAuth(Configuration);
+            services.AddRepositories();
+            services.AddDataServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

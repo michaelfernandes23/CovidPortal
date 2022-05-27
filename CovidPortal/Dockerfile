@@ -8,15 +8,15 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["CovidPortal/CovidPortal.csproj", "CovidPortal/"]
-RUN dotnet restore "CovidPortal/CovidPortal.csproj"
+RUN dotnet restore "CovidPortal/CovidPortal.API.csproj"
 COPY . .
 WORKDIR "/src/CovidPortal"
-RUN dotnet build "CovidPortal.csproj" -c Release -o /app/build
+RUN dotnet build "CovidPortal.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "CovidPortal.csproj" -c Release -o /app/publish
+RUN dotnet publish "CovidPortal.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CovidPortal.dll"]
+ENTRYPOINT ["dotnet", "CovidPortal.API.dll"]

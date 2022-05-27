@@ -3,23 +3,15 @@ using CovidPortal.SQL.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CovidPortal.SQL.Infrastructure.Repositories
 {
     public abstract class RepositoryBase<T> : RepositoryBase<T, string>, IRepository<T>, IRepository<T, string> where T : class, IEntityBase
     {
-        protected RepositoryBase(DbContext dbContext, IDbConnection dbConnection, string tableName)
-            : base(dbContext, dbConnection, tableName)
-        {
-        }
-
         protected RepositoryBase(DbContext dbContext, IDbConnection dbConnection)
             : base(dbContext, dbConnection)
         {
@@ -42,8 +34,6 @@ namespace CovidPortal.SQL.Infrastructure.Repositories
 
         private readonly IDbConnection _dbConnection;
 
-        private readonly string _tableName;
-
         private readonly DbSet<T> _dbSet;
 
         protected virtual DbSet<T> DbSet => _dbSet;
@@ -52,27 +42,11 @@ namespace CovidPortal.SQL.Infrastructure.Repositories
 
         protected virtual IDbConnection DbConnection => _dbConnection;
 
-        protected virtual string TableName => _tableName;
-
-        protected RepositoryBase(DbContext dbContext, IDbConnection dbConnection, string tableName)
+        protected RepositoryBase(DbContext dbContext, IDbConnection dbConnection)
         {
             _dbContext = dbContext;
             _dbConnection = dbConnection;
-            _tableName = tableName;
             _dbSet = _dbContext.Set<T>();
-        }
-
-        protected RepositoryBase(DbContext dbContext, IDbConnection dbConnection)
-            : this(dbContext, dbConnection, (string)null)
-        {
-            TableAttribute customAttribute = typeof(T).GetCustomAttribute<TableAttribute>();
-            if (customAttribute == null)
-            {
-                _tableName = typeof(T).Name;
-                return;
-            }
-
-            _tableName = ((!string.IsNullOrEmpty(customAttribute.Schema)) ? ("[" + customAttribute.Schema + "].[" + customAttribute.Name + "]") : customAttribute.Name);
         }
 
         public virtual Task AddRange(params T[] entity)
@@ -137,7 +111,7 @@ namespace CovidPortal.SQL.Infrastructure.Repositories
 
         public virtual Task<IEnumerable<T>> GetAllAsync()
         {
-            return _dbConnection.QueryAsync<T>("SELECT * FROM " + _tableName);
+            return Task.FromResult(_dbContext.Set<T>().AsEnumerable());
         }
     }
 }

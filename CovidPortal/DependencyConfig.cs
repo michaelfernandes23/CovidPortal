@@ -1,14 +1,21 @@
-﻿using CovidPortal.Services;
+﻿using CovidPortal.Domain.AutoMapper;
+using CovidPortal.Services;
 using CovidPortal.Services.Interfaces;
 using CovidPortal.SQL.Infrastructure.Data;
 using CovidPortal.SQL.Infrastructure.Interfaces;
 using CovidPortal.SQL.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace CovidPortal.API
@@ -77,7 +84,6 @@ namespace CovidPortal.API
 
         public static void AddAuth(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton(new HasPermissionFilterOptions("Trucks", ""));
             var audienceConfig = configuration.GetSection("Audience");
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(audienceConfig["Secret"]));
             var tokenValidationParameters = new TokenValidationParameters
@@ -111,6 +117,11 @@ namespace CovidPortal.API
             Log.Logger = new LoggerConfiguration()
                          .ReadFrom.Configuration(configurations)
                          .CreateLogger();
+        }
+
+        public static void AddMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(Mappings));
         }
 
         public static void AddCoresAllowAll(this IServiceCollection services)

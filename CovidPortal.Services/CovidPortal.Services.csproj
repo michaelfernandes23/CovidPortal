@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CovidPortal.Domain\CovidPortal.Domain.csproj" />
     <ProjectReference Include="..\CovidPortal.SQL.Infrastructure\CovidPortal.SQL.Infrastructure.csproj" />
   </ItemGroup>
