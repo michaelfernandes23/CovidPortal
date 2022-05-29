@@ -19,10 +19,12 @@ namespace CovidPortal.Services
         private readonly ICovidCountryDetailSqlRepository _covidCountryDetailSqlRepository;
 
 
-        public CovidService(IUnitOfWork unitOfWork, 
+        public CovidService(ILogger<CovidService> logger, 
+                            IUnitOfWork unitOfWork, 
                             IMapper mapper,
                             ICovidCountryDetailSqlRepository covidCountryDetailSqlRepository)
         {
+            _logger = logger;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
 
@@ -45,13 +47,16 @@ namespace CovidPortal.Services
 
         public async Task<CovidData> SaveCovidData(CovidData covidData)
         {
-            CovidCountryDetail tempEntity = await _covidCountryDetailSqlRepository.GetEntity(x => x.CountryCode == covidData.CountryCode);
+            CovidCountryDetail tempEntity = await _covidCountryDetailSqlRepository
+                .GetEntity(x => x.CountryCode == covidData.CountryCode);
             if (tempEntity != null)
-                throw new ValidationException($"Covid data already exists for the country having country code {covidData.CountryCode}");
+                throw new ValidationException($"Covid data already exists for the country having code {covidData.CountryCode}");
 
             CovidCountryDetail covidCountryDetail = _mapper.Map<CovidCountryDetail>(covidData);
             await _covidCountryDetailSqlRepository.Add(covidCountryDetail);
             await _unitOfWork.CommitAsync();
+
+            _logger.LogInformation($"Covid data was saved successfully.");
 
             return _mapper.Map<CovidData>(covidCountryDetail);
         }
@@ -74,6 +79,8 @@ namespace CovidPortal.Services
             await _covidCountryDetailSqlRepository.Update(covidCountryDetail);
             await _unitOfWork.CommitAsync();
 
+            _logger.LogInformation($"Covid data with Id {covidData.Id} was updated successfully.");
+
             return _mapper.Map<CovidData>(covidCountryDetail);
         }
 
@@ -85,6 +92,8 @@ namespace CovidPortal.Services
 
             await _covidCountryDetailSqlRepository.Remove(covidCountryDetail);
             await _unitOfWork.CommitAsync();
+
+            _logger.LogInformation($"Covid data with Id {id} was deleted successfully.");
         }
     }
 }

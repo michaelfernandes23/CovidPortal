@@ -10,29 +10,9 @@ using System.Threading.Tasks;
 
 namespace CovidPortal.SQL.Infrastructure.Repositories
 {
-    public abstract class RepositoryBase<T> : RepositoryBase<T, string>, IRepository<T>, IRepository<T, string> where T : class, IEntityBase
-    {
-        protected RepositoryBase(DbContext dbContext, IDbConnection dbConnection)
-            : base(dbContext, dbConnection)
-        {
-        }
-
-        public override Task<T> Add(T entity)
-        {
-            if (string.IsNullOrEmpty(entity.Id))
-            {
-                entity.Id = Guid.NewGuid().ToString();
-            }
-
-            return Task.FromResult(DbSet.Add(entity).Entity);
-        }
-    }
-
-    public abstract class RepositoryBase<T, TKey> : IRepository<T, TKey> where T : class, IEntityBase
+    public abstract class RepositoryBase<T> : IRepository<T> where T : class, IEntityBase
     {
         private readonly DbContext _dbContext;
-
-        private readonly IDbConnection _dbConnection;
 
         private readonly DbSet<T> _dbSet;
 
@@ -40,12 +20,9 @@ namespace CovidPortal.SQL.Infrastructure.Repositories
 
         protected virtual DbContext DbContext => _dbContext;
 
-        protected virtual IDbConnection DbConnection => _dbConnection;
-
-        protected RepositoryBase(DbContext dbContext, IDbConnection dbConnection)
+        protected RepositoryBase(DbContext dbContext)
         {
             _dbContext = dbContext;
-            _dbConnection = dbConnection;
             _dbSet = _dbContext.Set<T>();
         }
 
@@ -57,6 +34,11 @@ namespace CovidPortal.SQL.Infrastructure.Repositories
 
         public virtual Task<T> Add(T entity)
         {
+            if (string.IsNullOrEmpty(entity.Id))
+            {
+                entity.Id = Guid.NewGuid().ToString();
+            }
+
             return Task.FromResult(_dbSet.Add(entity).Entity);
         }
 
@@ -101,7 +83,7 @@ namespace CovidPortal.SQL.Infrastructure.Repositories
             return _dbSet.FirstOrDefaultAsync(filter);
         }
 
-        public Task<T> GetEntityById(TKey key)
+        public Task<T> GetEntityById(string key)
         {
             return _dbContext.FindAsync<T>(new object[1]
             {

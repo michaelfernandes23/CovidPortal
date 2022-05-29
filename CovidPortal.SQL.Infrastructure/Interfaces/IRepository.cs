@@ -8,11 +8,7 @@ using System.Threading.Tasks;
 
 namespace CovidPortal.SQL.Infrastructure.Interfaces
 {
-    public interface IRepository<T> : IRepository<T, string> where T : IEntityBase
-    {
-    }
-
-    public interface IRepository<T, TKey> where T : IEntityBase
+    public interface IRepository<T> where T : IEntityBase
     {
         Task AddRange(params T[] entities);
 
@@ -30,7 +26,7 @@ namespace CovidPortal.SQL.Infrastructure.Interfaces
 
         Task<T> GetEntity(Expression<Func<T, bool>> filter);
 
-        Task<T> GetEntityById(TKey key);
+        Task<T> GetEntityById(string key);
 
         Task<IEnumerable<T>> GetAllAsync();
     }
