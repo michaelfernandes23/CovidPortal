@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using CovidPortal.Domain.DTO;
+using CovidPortal.Domain;
 using CovidPortal.Domain.Entity;
-using CovidPortal.Services.Interfaces;
-using CovidPortal.SQL.Infrastructure.Interfaces;
+using CovidPortal.Domain.Interfaces;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -53,6 +52,9 @@ namespace CovidPortal.Services
                 throw new ValidationException($"Covid data already exists for the country having code {covidData.CountryCode}");
 
             CovidCountryDetail covidCountryDetail = _mapper.Map<CovidCountryDetail>(covidData);
+
+            new CovidCountryDetailValidator(_covidCountryDetailSqlRepository, OperationType.Add).ValidateAndThrow(covidCountryDetail);
+
             await _covidCountryDetailSqlRepository.Add(covidCountryDetail);
             await _unitOfWork.CommitAsync();
 
@@ -76,6 +78,8 @@ namespace CovidPortal.Services
             covidCountryDetail.NewRecovered = covidData.NewRecovered;
             covidCountryDetail.TotalRecovered = covidData.TotalRecovered;
 
+            new CovidCountryDetailValidator(_covidCountryDetailSqlRepository, OperationType.Update).ValidateAndThrow(covidCountryDetail);
+
             await _covidCountryDetailSqlRepository.Update(covidCountryDetail);
             await _unitOfWork.CommitAsync();
 
@@ -89,6 +93,8 @@ namespace CovidPortal.Services
             CovidCountryDetail covidCountryDetail = await _covidCountryDetailSqlRepository.GetEntityById(id);
             if (covidCountryDetail == null)
                 throw new ValidationException("Covid data does not exist");
+
+            new CovidCountryDetailValidator(_covidCountryDetailSqlRepository, OperationType.Delete).ValidateAndThrow(covidCountryDetail);
 
             await _covidCountryDetailSqlRepository.Remove(covidCountryDetail);
             await _unitOfWork.CommitAsync();

@@ -1,4 +1,4 @@
-﻿using CovidPortal.Domain.DTO;
+﻿using CovidPortal.Domain;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 ﻿using CovidPortal.Domain.Entity;
+using CovidPortal.Domain.Interfaces;
 using CovidPortal.SQL.Infrastructure.Data;
-using CovidPortal.SQL.Infrastructure.Interfaces;
 
 namespace CovidPortal.SQL.Infrastructure.Repositories
 {

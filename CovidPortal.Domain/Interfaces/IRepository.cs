@@ -1,12 +1,10 @@
-﻿using CovidPortal.Domain.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CovidPortal.SQL.Infrastructure.Interfaces
+namespace CovidPortal.Domain.Interfaces
 {
     public interface IRepository<T> where T : IEntityBase
     {
@@ -29,5 +27,7 @@ namespace CovidPortal.SQL.Infrastructure.Interfaces
         Task<T> GetEntityById(string key);
 
         Task<IEnumerable<T>> GetAllAsync();
+
+        Task<bool> HasDataAsync(Expression<Func<T, bool>> predicate);
     }
 }

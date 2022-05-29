@@ -1,4 +1,4 @@
-﻿using CovidPortal.SQL.Infrastructure.Interfaces;
+﻿using CovidPortal.Domain.Interfaces;
 using System.Threading.Tasks;
 
 namespace CovidPortal.SQL.Infrastructure.Data

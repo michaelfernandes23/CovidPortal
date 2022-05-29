@@ -1,6 +1,6 @@
-﻿using CovidPortal.Domain.DTO;
+﻿using CovidPortal.Domain;
+using CovidPortal.Domain.Interfaces;
 using CovidPortal.Services;
-using CovidPortal.Services.Interfaces;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

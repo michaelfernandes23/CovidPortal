@@ -1,8 +1,7 @@
-﻿using CovidPortal.Domain.DTO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CovidPortal.Services.Interfaces
+namespace CovidPortal.Domain.Interfaces
 {
     public interface ICovidService
     {

@@ -1,8 +1,7 @@
 ﻿using CovidPortal.Domain.AutoMapper;
+using CovidPortal.Domain.Interfaces;
 using CovidPortal.Services;
-using CovidPortal.Services.Interfaces;
 using CovidPortal.SQL.Infrastructure.Data;
-using CovidPortal.SQL.Infrastructure.Interfaces;
 using CovidPortal.SQL.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +13,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
-using System.Data;
 using System.Linq;
 using System.Text;
 

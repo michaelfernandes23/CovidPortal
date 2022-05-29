@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CovidPortal.SQL.Infrastructure.Interfaces
+namespace CovidPortal.Domain.Interfaces
 {
     public interface ICovidCountryDetailSqlRepository : IRepository<CovidCountryDetail>
     {

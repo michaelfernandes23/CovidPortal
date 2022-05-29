@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace CovidPortal.Domain.DTO
+namespace CovidPortal.Domain
 {
     public class ServiceResponse<T>
     {

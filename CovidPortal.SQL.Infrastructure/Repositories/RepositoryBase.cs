@@ -1,5 +1,4 @@
 ﻿using CovidPortal.Domain.Interfaces;
-using CovidPortal.SQL.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -95,5 +94,7 @@ namespace CovidPortal.SQL.Infrastructure.Repositories
         {
             return Task.FromResult(_dbContext.Set<T>().AsEnumerable());
         }
+
+        public Task<bool> HasDataAsync(Expression<Func<T, bool>> predicate) => _dbContext.Set<T>().AnyAsync(predicate);
     }
 }
