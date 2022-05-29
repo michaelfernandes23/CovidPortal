@@ -90,10 +90,7 @@ namespace CovidPortal.Services
 
         public async Task DeleteCovidData(string id)
         {
-            CovidCountryDetail covidCountryDetail = await _covidCountryDetailSqlRepository.GetEntityById(id);
-            if (covidCountryDetail == null)
-                throw new ValidationException("Covid data does not exist");
-
+            CovidCountryDetail covidCountryDetail = new CovidCountryDetail { Id = id };
             new CovidCountryDetailValidator(_covidCountryDetailSqlRepository, OperationType.Delete).ValidateAndThrow(covidCountryDetail);
 
             await _covidCountryDetailSqlRepository.Remove(covidCountryDetail);

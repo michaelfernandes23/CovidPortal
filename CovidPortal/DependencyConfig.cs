@@ -1,4 +1,4 @@
-﻿using CovidPortal.Domain.AutoMapper;
+﻿using CovidPortal.Domain;
 using CovidPortal.Domain.Interfaces;
 using CovidPortal.Services;
 using CovidPortal.SQL.Infrastructure.Data;
